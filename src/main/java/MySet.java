@@ -68,7 +68,7 @@ public class MySet<E extends Comparable<E>> implements Set<E> {
 
     @Override
     public Object[] toArray() {
-        Object[] array = new Object[size];
+        var array = new Object[size];
         var iterator = iterator();
         var i = 0;
         while (iterator.hasNext()) {
@@ -83,17 +83,21 @@ public class MySet<E extends Comparable<E>> implements Set<E> {
         var newNode = new Node<E>();
         newNode.setValue(value);
         if (rootNode == null) {
+            //если дерево пустое
             rootNode = newNode;
             size++;
             return true;
         } else {
             var currentNode = rootNode;
             Node<E> parentNode;
+
             while (true) {
                 parentNode = currentNode;
                 if (value.equals(currentNode.getValue())) {
+                    //если добавляемый элемент уже существует
                     return false;
                 } else if (value.compareTo(currentNode.getValue()) < 0) {
+                    //если добовляем элемент меньше текущего то уходим в левое поддерево
                     currentNode = currentNode.getLeftChild();
                     if (currentNode == null) {
                         size++;
@@ -101,6 +105,7 @@ public class MySet<E extends Comparable<E>> implements Set<E> {
                         return true;
                     }
                 } else {
+                    // если доавляемый элемент больше текущего по уходим в правое поддерево
                     currentNode = currentNode.getRightChild();
                     if (currentNode == null) {
                         size++;
@@ -158,7 +163,6 @@ public class MySet<E extends Comparable<E>> implements Set<E> {
 
             //замена значения в удаляемом элементе
             currentNode.setValue(leftMost.getValue());
-
         }
         size--;
         return true;
@@ -219,6 +223,5 @@ public class MySet<E extends Comparable<E>> implements Set<E> {
         }
         return ts;
     }
-
 }
 

@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class MySetTest extends Assert {
@@ -37,11 +38,11 @@ public class MySetTest extends Assert {
 
     @Test
     public void sizeOfSet() {
-        assertTrue(set.size() == 10);
+        assertEquals(10, set.size());
         set.add(1);
-        assertTrue(set.size() == 11);
+        assertEquals(11, set.size());
         set.remove(1);
-        assertTrue(set.size() == 10);
+        assertEquals(10, set.size());
     }
 
     @Test
@@ -51,15 +52,15 @@ public class MySetTest extends Assert {
             assertTrue(set.contains(item));
             size++;
         }
-        assertTrue(size == set.size());
+        assertEquals(size, set.size());
     }
 
     @Test
     public void ToArrayFromSet() {
         var array = set.toArray();
-        assertTrue(array.length == set.size());
+        assertEquals(array.length, set.size());
         for (var item : array) {
-            assertTrue(set.contains(item));
+            assertTrue(item.toString(),set.contains(item));
         }
     }
 
@@ -68,9 +69,9 @@ public class MySetTest extends Assert {
         assertFalse(set.remove(99));
         var array = set.toArray();
         for (var item : array) {
-            assertTrue(set.remove(item));
+            assertTrue(item.toString(),set.remove(item));
         }
-        assertTrue(set.size() == 0);
+        assertEquals(0, set.size());
     }
 
     @Test
@@ -84,7 +85,7 @@ public class MySetTest extends Assert {
     @Test
     public void SetToClear() {
         set.clear();
-        assertTrue(set.size() == 0);
+        assertEquals(0, set.size());
     }
 
     @Test
@@ -97,7 +98,7 @@ public class MySetTest extends Assert {
     public void retainAllFromSet() {
         var list = Arrays.asList(20, 30, 4);
         assertTrue(set.retainAll(list));
-        assertTrue(set.size() == list.size());
+        assertEquals(set.size(), list.size());
         assertFalse(set.retainAll(list));
     }
 
@@ -111,13 +112,13 @@ public class MySetTest extends Assert {
     public void toArrayWithArrFromSet() {
         var arr = new Integer[5];
         Integer[] array = set.toArray(arr);
-        assertTrue(array.length == set.size());
+        assertEquals(array.length, set.size());
         for (var item : array) {
             assertTrue(set.contains(item));
         }
 
         array = set.toArray(new Integer[17]);
-        assertTrue(array.length == 17);
+        assertEquals(17, array.length);
         var countNull =0;
         for (var item : array) {
             if (item != null)
@@ -125,7 +126,7 @@ public class MySetTest extends Assert {
             else
                 countNull++;
         }
-        assertTrue(countNull == array.length -set.size());
+        assertEquals(countNull, array.length - set.size());
 
     }
 

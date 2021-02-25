@@ -29,13 +29,11 @@ public class Node<E> {
 
     @Override
     public String toString() {
-        var sb = new StringBuffer("Node{value=");
-        sb.append(value);
-        sb.append(", leftChild=");
-        sb.append(leftChild);
-        sb.append(", rightChild=");
-        sb.append(rightChild);
-        sb.append('}');
-        return sb.toString();
+        return "Node{value=" + value +
+                ", leftChild=" +
+                leftChild +
+                ", rightChild=" +
+                rightChild +
+                '}';
     }
 }
